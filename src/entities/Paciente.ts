@@ -15,4 +15,6 @@ export class Paciente {
 
     @Column()
     status: "ativo" | "não ativo"
+
+    
 }

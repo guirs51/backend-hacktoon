@@ -4,7 +4,7 @@ import { Leitos } from "../entities/Leitos";
 export class LeitosService {
     private repo = AppDataSource.getRepository(Leitos)
 
-    async create(data: { setor: string, name: string, quantidade: number, disponivel: "Disponivel" | "Cheio" }) {
+    async create(data: { setor: string, name: string, quantidadeEmUso: number, disponivel: "Disponivel" | "Cheio", qtdLeitos: number}) {
         try {
             const exist = await this.repo.findOne({ where: { name: data.name } })
             if (exist) throw new Error('leito ja criado')

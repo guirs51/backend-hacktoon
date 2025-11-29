@@ -12,7 +12,6 @@ export class Admin {
     @Column({ length: 100 })
     name: string
 
-
     @BeforeInsert()
     @AfterUpdate()
     async hashPassword() {

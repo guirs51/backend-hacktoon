@@ -46,14 +46,14 @@ export class PacienteService {
             if (!exist) throw new Error("Paciente não encontado");
             const leitos = await this.leitoRepo.findOne({ where: { id: data.id } })
             if (!leitos) throw new Error("leito não encontrado")
-                console.log(exist)
+            console.log(exist)
             if (exist.status === 'ativo') {
-                leitos.quantidade -= 1
-                if (leitos.quantidade < 0){
-                    leitos.quantidade = 0
+                leitos.quantidadeEmUso -= 1
+                if (leitos.quantidadeEmUso < 0) {
+                    leitos.quantidadeEmUso = 0
                 }
 
-                if (leitos.quantidade == 0) {
+                if (leitos.quantidadeEmUso == 0) {
                     leitos.disponivel = "Cheio"
                 } else {
                     leitos.disponivel = "Disponivel"
@@ -62,12 +62,12 @@ export class PacienteService {
                 exist.status = "não ativo"
 
             } else if (exist.status === 'não ativo') {
-                leitos.quantidade += 1
-                if (leitos.quantidade > 999){
-                    leitos.quantidade = 999
+                leitos.quantidadeEmUso += 1
+                if (leitos.quantidadeEmUso > 999) {
+                    leitos.quantidadeEmUso = 999
                 }
 
-                if (leitos.quantidade == 0) {
+                if (leitos.quantidadeEmUso == 0) {
                     leitos.disponivel = "Cheio"
                 } else {
                     leitos.disponivel = "Disponivel"

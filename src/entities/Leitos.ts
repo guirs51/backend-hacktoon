@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, CreateDateColumn, UpdateDateColumn, AfterUpdate } from 'typeorm'
-import bcrypt from 'bcrypt'
+import { IsInt, Min, Max } from "class-validator";
 
 @Entity('leitos')
 export class Leitos {
@@ -13,8 +13,12 @@ export class Leitos {
     name: string
 
     @Column()
-    quantidade: number
+    quantidadeEmUso: number
 
     @Column()
     disponivel: "Disponivel" | "Cheio"
+
+    @Column()
+    @Max(45)
+    qtdLeitosMax: 40
 }
